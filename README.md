@@ -17,7 +17,7 @@ A developer tool that allows users to submit SQL queries, executes them on a MyS
 ```js
 database/
 ├── schema.sql
-└── seed.json
+└── seed.sql
 ```
 
 ```js
