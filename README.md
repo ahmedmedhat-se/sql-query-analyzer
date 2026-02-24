@@ -45,6 +45,7 @@ server/
 ├── .env
 ├── .gitignore
 ├── app.js
+├── jest.config.js
 ├── package-lock.json
 └── package.json
 ```
