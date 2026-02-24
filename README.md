@@ -1,15 +1,15 @@
 # SQL Query Performance Analyzer Backend
 
-> Developed by **Ahmed Medhat**
+> Developed by **Ahmed Medhat** - **Marwan Essa**
 
 ---
 ## 📋 Project Overview
 
 A developer tool that allows users to submit SQL queries, executes them on a MySQL test database, extracts performance metrics, stores them, and provides analytics insights via a REST API. Built with **Node.js, Express, and MySQL**.
 
-**Developed by:** Ahmed Medhat - Marwan Essa
-**Project Type:** Backend / API Server / Data Analysis
-**License:** Proprietary – All rights reserved
+**Developed by:** Ahmed Medhat - Marwan Essa.
+**Project Type:** Backend / API Server / Data Analysis.
+**License:** Proprietary – All rights reserved.
 
 ---
 ### SQL QUERY ANALYZER
