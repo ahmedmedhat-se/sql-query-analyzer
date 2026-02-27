@@ -8,7 +8,7 @@ st.title("🚀 SQL Performance Tuning Dashboard")
 
 @st.cache_data
 def load_data():
-    path = r"C:\Users\Marwan\Test Data\SQL_Performance_Analysis.csv"
+    path = "SQL_Dashboard\SQL_Performance_Analysis.csv"
     df = pd.read_csv(path)
     
     # --- تصحيح عمود Index Used بناءً على صورتك ---
