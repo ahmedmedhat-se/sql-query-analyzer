@@ -198,20 +198,42 @@ def chart_layout(**kwargs):
     return base
 
 # ── Data ─────────────────────────────────────────────────────────────────────
+# ── Data Loading Optimized ──────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    path = "SQL_dashboard/SQL_Performance_Analysis.csv"
-    df = pd.read_csv(path)
+    # 1. قائمة بالمسارات المحتملة (عشان نضمن إنه يلقط الملف)
+    possible_paths = [
+        "SQL_Performance_Analysis.csv",                            # لو الملف بره جنب app.py
+        "SQL_dashboard/SQL_Performance_Analysis.csv",              # لو جوه فولدر حرف D كبير
+        "sql_dashboard/SQL_Performance_Analysis.csv",              # لو جوه فولدر حرف d صغير
+    ]
+    
+    df = None
+    for path in possible_paths:
+        try:
+            df = pd.read_csv(path)
+            # لو نجح في القراءة، نكسر الحلقة
+            break 
+        except FileNotFoundError:
+            continue
+            
+    if df is None:
+        raise FileNotFoundError("Could not find SQL_Performance_Analysis.csv in any expected location.")
+
+    # التنظيف والتحويل
     numeric_cols = ["execution_time_ms", "rows_examined", "rows_returned", "complexity_score"]
     for col in numeric_cols:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+    
     df['index_status'] = df['index_used'].apply(
         lambda x: 'Indexed' if "PRIMARY" in str(x).upper() or str(x) == "1" else 'Non-Indexed'
     )
     df["efficiency_ratio"] = (df["rows_returned"] / (df["rows_examined"] + 1)).clip(upper=1)
+    
     if 'id_x' not in df.columns:
         df['id_x'] = range(1, len(df) + 1)
+        
     return df
 
 try:
